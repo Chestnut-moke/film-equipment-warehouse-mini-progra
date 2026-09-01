@@ -1,0 +1,69 @@
+.top {
+  align-items: center;
+}
+
+.add {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 36rpx;
+  background: #007aff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+}
+
+.filters {
+  white-space: nowrap;
+  margin-bottom: 22rpx;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 66rpx;
+  padding: 0 28rpx;
+  margin-right: 14rpx;
+  border-radius: 999rpx;
+  color: #6e6e73;
+  background: #fff;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.filter.active {
+  color: #fff;
+  background: #1d1d1f;
+}
+
+.rental {
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.rental-no {
+  color: #86868b;
+  font-size: 23rpx;
+  font-weight: 800;
+}
+
+.customer {
+  margin-top: 12rpx;
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.meta,
+.money {
+  margin-top: 8rpx;
+  color: #86868b;
+  font-size: 24rpx;
+}
+
+.empty {
+  padding: 36rpx;
+  text-align: center;
+  color: #86868b;
+}

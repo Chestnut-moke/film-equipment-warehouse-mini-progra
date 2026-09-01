@@ -1,0 +1,26 @@
+<wxs module="money" src="../../utils/money.wxs" />
+<view class="page">
+  <view class="state-error" wx:if="{{_error && !rentals.length}}" bindtap="onRetry">加载失败，点击重试</view>
+  <view class="loading-bar" wx:elif="{{_loading}}">刷新中...</view>
+  <block>
+  <view class="top row">
+    <view class="nav-title">租赁单</view>
+    <view class="add" bindtap="addRental">＋</view>
+  </view>
+
+  <scroll-view class="filters" scroll-x>
+    <view class="filter {{item.active}}" wx:for="{{statuses}}" wx:key="key" data-status="{{item.key}}" bindtap="setStatus">{{item.text}}</view>
+  </scroll-view>
+
+  <view class="empty card" wx:if="{{!rentals.length}}">暂无租赁单</view>
+  <view class="rental card" wx:for="{{rentals}}" wx:key="_id" data-id="{{item._id}}" bindtap="openRental">
+    <view class="row">
+      <view class="rental-no">{{item.rentalNo}}</view>
+      <view class="status-pill status-{{item.displayStatus}}">{{item.statusText}}</view>
+    </view>
+    <view class="customer">{{item.customerSnapshot.name}}</view>
+    <view class="meta">{{item.devices.length}} 台设备 · {{item.startAt}} 至 {{item.expectedReturnAt}}</view>
+    <view class="money">租金 {{money.yuan(item.totalAmount)}} · 已收 {{money.yuan(item.paidAmount)}}</view>
+  </view>
+  </block>
+</view>
