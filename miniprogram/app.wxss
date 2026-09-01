@@ -1,0 +1,154 @@
+page {
+  min-height: 100vh;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+}
+
+view,
+text,
+input,
+textarea,
+button,
+picker {
+  box-sizing: border-box;
+}
+
+button {
+  background: initial;
+  padding: 0;
+  margin: 0;
+  line-height: inherit;
+  border-radius: 0;
+}
+
+button::after {
+  border: none;
+}
+
+.page {
+  padding: 28rpx 28rpx 56rpx;
+}
+
+.nav-title {
+  font-size: 48rpx;
+  line-height: 60rpx;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin: 12rpx 0 24rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #6e6e73;
+  margin: 34rpx 4rpx 16rpx;
+}
+
+.state-error {
+  padding: 120rpx 28rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #86868b;
+}
+
+.loading-bar {
+  padding: 18rpx 28rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #86868b;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.state-hint {
+  padding: 80rpx 28rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #86868b;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1rpx solid rgba(0, 0, 0, 0.05);
+  border-radius: 22rpx;
+  box-shadow: 0 12rpx 34rpx rgba(0, 0, 0, 0.06);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.muted {
+  color: #86868b;
+}
+
+.primary-btn,
+.secondary-btn,
+.danger-btn {
+  height: 88rpx;
+  border-radius: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.primary-btn {
+  background: #007aff;
+  color: #fff;
+}
+
+.secondary-btn {
+  background: rgba(255, 255, 255, 0.92);
+  color: #007aff;
+  border: 1rpx solid rgba(0, 122, 255, 0.22);
+  box-shadow: 0 12rpx 34rpx rgba(0, 0, 0, 0.06);
+}
+
+.danger-btn {
+  background: rgba(255, 255, 255, 0.92);
+  color: #ff3b30;
+  border: 1rpx solid rgba(255, 59, 48, 0.25);
+  box-shadow: 0 12rpx 34rpx rgba(0, 0, 0, 0.06);
+}
+
+.status-pill {
+  min-width: 96rpx;
+  height: 44rpx;
+  padding: 0 18rpx;
+  border-radius: 999rpx;
+  font-size: 23rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.status-available,
+.status-returned {
+  color: #248a3d;
+  background: #e7f8ed;
+}
+
+.status-reserved {
+  color: #9a6700;
+  background: #fff4ce;
+}
+
+.status-rented,
+.status-overdue,
+.status-partReturned {
+  color: #c9342b;
+  background: #ffe8e6;
+}
+
+.status-repairing,
+.status-disabled {
+  color: #5e5ce6;
+  background: #eeeeff;
+}

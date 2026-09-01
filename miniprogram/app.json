@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/warehouses/index",
+    "pages/devices/index",
+    "pages/deviceForm/index",
+    "pages/deviceDetail/index",
+    "pages/schedule/index",
+    "pages/rentalForm/index",
+    "pages/rentals/index",
+    "pages/rentalDetail/index",
+    "pages/customers/index",
+    "pages/customerDetail/index",
+    "pages/history/index"
+  ],
+  "window": {
+    "backgroundColor": "#F5F5F7",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F5F5F7",
+    "navigationBarTitleText": "影视设备管理系统",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#8E8E93",
+    "selectedColor": "#007AFF",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "工作台",
+        "iconPath": "images/icons/tab-workbench.png",
+        "selectedIconPath": "images/icons/tab-workbench-active.png"
+      },
+      {
+        "pagePath": "pages/devices/index",
+        "text": "设备",
+        "iconPath": "images/icons/tab-devices.png",
+        "selectedIconPath": "images/icons/tab-devices-active.png"
+      },
+      {
+        "pagePath": "pages/rentals/index",
+        "text": "租赁",
+        "iconPath": "images/icons/tab-rentals.png",
+        "selectedIconPath": "images/icons/tab-rentals-active.png"
+      },
+      {
+        "pagePath": "pages/history/index",
+        "text": "统计",
+        "iconPath": "images/icons/tab-stats.png",
+        "selectedIconPath": "images/icons/tab-stats-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}
