@@ -1,0 +1,34 @@
+<view class="page">
+  <view class="nav-title">仓库管理</view>
+
+  <view class="section-title">当前仓库</view>
+  <view class="warehouse card {{item.active}}" wx:for="{{warehouses}}" wx:key="_id">
+    <view bindtap="switchWarehouse" data-id="{{item._id}}">
+      <view class="warehouse-name">{{item.name}}</view>
+      <view class="warehouse-meta">{{item.cityText}} · {{item.managerText}}</view>
+      <view class="warehouse-meta">{{item.addressText}}</view>
+    </view>
+    <view class="warehouse-actions">
+      <view class="tag" wx:if="{{item.isDefault}}">默认</view>
+      <view class="edit" bindtap="editWarehouse" data-id="{{item._id}}">编辑</view>
+      <view class="delete" bindtap="deleteWarehouse" data-id="{{item._id}}" data-name="{{item.name}}">删除</view>
+    </view>
+  </view>
+
+  <view class="section-title">{{formTitle}}</view>
+  <view class="form card">
+    <view class="field"><view class="label">仓库名称</view><input value="{{form.name}}" data-field="name" bindinput="onInput" placeholder="如 北京器材仓" /></view>
+    <view class="field"><view class="label">城市</view><input value="{{form.city}}" data-field="city" bindinput="onInput" placeholder="选填" /></view>
+    <view class="field"><view class="label">地址</view><input value="{{form.address}}" data-field="address" bindinput="onInput" placeholder="选填" /></view>
+    <view class="field"><view class="label">负责人</view><input value="{{form.manager}}" data-field="manager" bindinput="onInput" placeholder="选填" /></view>
+    <view class="field"><view class="label">电话</view><input value="{{form.phone}}" data-field="phone" bindinput="onInput" placeholder="选填" /></view>
+    <view class="field textarea"><view class="label">备注</view><textarea value="{{form.remark}}" data-field="remark" bindinput="onInput" placeholder="选填"></textarea></view>
+    <view class="field">
+      <checkbox-group bindchange="onDefaultChange">
+        <label class="checkbox-line"><checkbox value="default" checked="{{form.isDefault}}" color="#007AFF" />设为默认仓库</label>
+      </checkbox-group>
+    </view>
+  </view>
+  <view class="primary-btn save" bindtap="saveWarehouse">保存仓库</view>
+  <view class="secondary-btn reset" bindtap="resetForm">清空表单</view>
+</view>

@@ -1,0 +1,99 @@
+.warehouse {
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  border: 2rpx solid transparent;
+}
+
+.warehouse.active {
+  border-color: rgba(0, 122, 255, 0.45);
+}
+
+.warehouse-name {
+  font-size: 32rpx;
+  font-weight: 900;
+}
+
+.warehouse-meta {
+  margin-top: 8rpx;
+  color: #86868b;
+  font-size: 24rpx;
+}
+
+.warehouse-actions {
+  margin-top: 16rpx;
+  display: flex;
+  align-items: center;
+}
+
+.tag,
+.edit,
+.delete {
+  height: 48rpx;
+  padding: 0 18rpx;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.tag {
+  color: #248a3d;
+  background: #e7f8ed;
+  margin-right: 12rpx;
+}
+
+.edit {
+  color: #007aff;
+  background: #e8f2ff;
+  margin-right: 12rpx;
+}
+
+.delete {
+  color: #ff3b30;
+  background: #fff1f1;
+}
+
+.form {
+  overflow: hidden;
+}
+
+.field {
+  padding: 22rpx 24rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.06);
+}
+
+.field:last-child {
+  border-bottom: none;
+}
+
+.label {
+  color: #6e6e73;
+  font-size: 23rpx;
+  font-weight: 800;
+  margin-bottom: 10rpx;
+}
+
+input,
+textarea {
+  width: 100%;
+  font-size: 30rpx;
+}
+
+textarea {
+  min-height: 120rpx;
+}
+
+.checkbox-line {
+  font-size: 28rpx;
+  color: #1d1d1f;
+}
+
+.save {
+  margin-top: 24rpx;
+}
+
+.reset {
+  margin-top: 16rpx;
+}
