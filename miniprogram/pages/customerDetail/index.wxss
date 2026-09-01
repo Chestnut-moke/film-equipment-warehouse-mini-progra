@@ -1,0 +1,75 @@
+.info-card {
+  padding: 28rpx 30rpx;
+  margin-bottom: 18rpx;
+}
+
+.customer-name {
+  font-size: 42rpx;
+  font-weight: 800;
+  margin-bottom: 18rpx;
+}
+
+.info-row {
+  display: flex;
+  margin-top: 12rpx;
+  font-size: 27rpx;
+}
+
+.info-row .label {
+  width: 160rpx;
+  color: #86868b;
+  flex-shrink: 0;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16rpx;
+}
+
+.metric {
+  padding: 24rpx;
+}
+
+.metric-value {
+  font-size: 38rpx;
+  font-weight: 800;
+}
+
+.metric-label {
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: #86868b;
+}
+
+.rental {
+  padding: 24rpx;
+  margin-top: 14rpx;
+}
+
+.rental-no {
+  font-size: 29rpx;
+  font-weight: 700;
+}
+
+.rental-meta {
+  margin-top: 10rpx;
+  color: #86868b;
+  font-size: 25rpx;
+}
+
+.rental-meta.money {
+  color: #1d1d1f;
+  font-weight: 600;
+}
+
+.unpaid {
+  color: #FF3B30;
+}
+
+.empty {
+  padding: 40rpx;
+  text-align: center;
+  color: #86868b;
+  font-size: 27rpx;
+}
