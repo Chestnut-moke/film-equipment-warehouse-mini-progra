@@ -1,0 +1,30 @@
+// 金额千分位格式化：12345 → "12,345"
+function format(value) {
+  if (value === undefined || value === null || value === "") return "0";
+  var num = value - 0;
+  if (num !== num) return "" + value;
+  num = Math.floor(num);
+  var s = "" + num;
+  var result = "";
+  var cnt = 0;
+  var i;
+  for (i = s.length - 1; i >= 0; i--) {
+    result = s.charAt(i) + result;
+    cnt++;
+    if (cnt === 3 && i > 0) {
+      result = "," + result;
+      cnt = 0;
+    }
+  }
+  return result;
+}
+
+// 带 ¥ 前缀
+function yuan(value) {
+  return "¥" + format(value);
+}
+
+module.exports = {
+  format: format,
+  yuan: yuan,
+};
