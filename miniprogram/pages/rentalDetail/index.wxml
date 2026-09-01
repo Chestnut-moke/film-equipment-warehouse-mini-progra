@@ -1,0 +1,88 @@
+<wxs module="money" src="../../utils/money.wxs" />
+<view class="page" wx:if="{{_error && !rental}}"><view class="state-error" bindtap="onRetry">加载失败，点击重试</view></view>
+<view class="page" wx:elif="{{rental}}">
+  <view class="head card">
+    <view class="row">
+      <view class="rental-no">{{rental.rentalNo}}</view>
+      <view class="status-pill status-{{rental.displayStatus}}">{{rental.statusText}}</view>
+    </view>
+    <view class="customer">{{rental.customerSnapshot.name}}</view>
+    <view class="meta">{{rental.customerSnapshot.phone}} · {{rental.companyText}}</view>
+  </view>
+
+  <view class="section-title">租期费用</view>
+  <view class="card list">
+    <view class="line row"><text>开始时间</text><text>{{rental.startAt}}</text></view>
+    <view class="line row"><text>预计归还</text><text>{{rental.expectedReturnAt}}</text></view>
+    <view class="line row"><text>实际归还</text><text>{{rental.actualReturnText}}</text></view>
+    <view class="line row"><text>租赁时长</text><text>{{rental.durationText}}</text></view>
+    <view class="line row"><text>租金</text><text>{{money.yuan(rental.rentAmount)}}</text></view>
+    <view class="line row"><text>押金</text><text>{{money.yuan(rental.depositAmount)}}</text></view>
+    <view class="line row"><text>损坏费用</text><text>{{money.yuan(rental.damageFee)}}</text></view>
+    <view class="line row tappable" wx:if="{{rental.status !== 'cancelled'}}" bindtap="addPayment"><text>已收</text><text>{{money.yuan(rental.paidAmount)}} ›</text></view>
+    <view class="line row" wx:else><text>已收</text><text>{{money.yuan(rental.paidAmount)}}</text></view>
+    <view class="line row"><text>付款状态</text><text>{{rental.paymentText}}</text></view>
+    <view class="line row tappable" wx:if="{{rental.status !== 'cancelled'}}" bindtap="updateDeposit"><text>押金状态</text><text>{{rental.depositText}} ›</text></view>
+    <view class="line row" wx:else><text>押金状态</text><text>{{rental.depositText}}</text></view>
+  </view>
+
+  <view class="section-title">设备清单</view>
+  <view class="device card" wx:for="{{rental.devices}}" wx:key="deviceId" data-id="{{item.deviceId}}" bindtap="openDevice">
+    <view>
+      <view class="device-name">{{item.name}}</view>
+      <view class="device-meta">{{item.deviceNo}} · {{item.brand}} {{item.model}}</view>
+      <view class="device-meta">{{item.returnText}}</view>
+    </view>
+    <view class="status-pill status-{{item.status}}">{{item.statusText}}</view>
+  </view>
+
+  <view class="primary-btn confirm" wx:if="{{rental.status === 'reserved'}}" bindtap="confirmRentOut">确认借出</view>
+  <view class="secondary-btn print-btn" bindtap="showPrint">生成出库单 PDF</view>
+  <view class="danger-btn cancel-btn" wx:if="{{rental.status === 'reserved' || rental.status === 'rented'}}" bindtap="cancelRental">取消{{rental.status === 'reserved' ? '预约' : '租赁'}}</view>
+
+  <block wx:if="{{canReturn}}">
+    <view class="section-title section-title-row">
+      <text>归还处理</text>
+      <view class="scan-entry" bindtap="scanForReturn">扫码拣选</view>
+    </view>
+    <view class="return-row card" wx:for="{{rental.devices}}" wx:key="deviceId" wx:if="{{!item.returnedAt}}" data-deviceid="{{item.deviceId}}" bindtap="toggleReturnDevice">
+      <view class="return-check-mark {{returnCheckedMap[item.deviceId] ? 'checked' : ''}}">{{returnCheckedMap[item.deviceId] ? '✓' : ''}}</view>
+      <text>{{item.deviceNo}} {{item.name}}</text>
+    </view>
+
+    <view class="section-title">损坏设备</view>
+    <checkbox-group bindchange="onDamageChange">
+      <view class="return-row card" wx:for="{{rental.devices}}" wx:key="deviceId" wx:if="{{!item.returnedAt}}">
+        <label>
+          <checkbox value="{{item.deviceId}}" color="#FF3B30" />
+          <text>{{item.deviceNo}} {{item.name}}</text>
+        </label>
+      </view>
+    </checkbox-group>
+
+    <view class="form card">
+      <view class="field"><view class="label">损坏/维修费用</view><input type="digit" value="{{damageFee}}" data-field="damageFee" bindinput="onInput" placeholder="0" /></view>
+      <view class="field"><view class="label">归还备注</view><input value="{{remark}}" data-field="remark" bindinput="onInput" placeholder="设备状态、扣押金说明" /></view>
+    </view>
+
+    <view class="deposit-hint card" wx:if="{{rental.depositAmount > 0 && (damagedIds.length || damageFee)}}">
+      <view class="deposit-hint-title">押金预估</view>
+      <view class="deposit-hint-body">
+        押金 <text class="hint-amt">{{money.yuan(rental.depositAmount)}}</text>
+        <text wx:if="{{damageFee}}"> → 扣除 <text class="hint-deduct">{{money.yuan(damageFee)}}</text></text>
+        → 应退 <text class="hint-refund">{{money.yuan(rental.depositAmount - damageFee)}}</text>
+      </view>
+    </view>
+
+    <view class="primary-btn submit" bindtap="submitReturn">确认归还所选设备</view>
+  </block>
+
+  <export-modal
+    visible="{{printVisible}}"
+    title="出库单 PDF"
+    showHeader
+    showOperator
+    bind:close="hidePrint"
+    bind:submit="submitPrint"
+  />
+</view>

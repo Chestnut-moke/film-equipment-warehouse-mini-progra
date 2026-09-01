@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "租赁单详情",
+  "usingComponents": {
+    "export-modal": "../../components/export-modal/index"
+  }
+}

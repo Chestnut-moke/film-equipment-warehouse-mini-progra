@@ -1,0 +1,189 @@
+.head {
+  padding: 28rpx;
+}
+
+.rental-no {
+  color: #86868b;
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.customer {
+  margin-top: 18rpx;
+  font-size: 48rpx;
+  line-height: 58rpx;
+  font-weight: 800;
+}
+
+.meta {
+  margin-top: 10rpx;
+  color: #86868b;
+  font-size: 26rpx;
+}
+
+.list {
+  overflow: hidden;
+}
+
+.tappable {
+  color: #007aff;
+}
+
+.line {
+  padding: 24rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.06);
+  font-size: 28rpx;
+}
+
+.line:last-child {
+  border-bottom: none;
+}
+
+.device {
+  padding: 22rpx;
+  margin-bottom: 14rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.device-name {
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.device-meta {
+  margin-top: 7rpx;
+  color: #86868b;
+  font-size: 24rpx;
+}
+
+.return-row {
+  padding: 22rpx;
+  margin-bottom: 12rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+}
+
+.return-row text {
+  margin-left: 16rpx;
+  flex: 1;
+}
+
+.return-check-mark {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 6rpx;
+  border: 2rpx solid #C7C7CC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #C7C7CC;
+  flex-shrink: 0;
+}
+
+.return-check-mark.checked {
+  background: #007AFF;
+  border-color: #007AFF;
+  color: #fff;
+}
+
+.form {
+  overflow: hidden;
+}
+
+.field {
+  padding: 22rpx 24rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.06);
+}
+
+.field:last-child {
+  border-bottom: none;
+}
+
+.label {
+  color: #6e6e73;
+  font-size: 23rpx;
+  font-weight: 800;
+  margin-bottom: 10rpx;
+}
+
+input {
+  width: 100%;
+  font-size: 30rpx;
+}
+
+.submit,
+.confirm {
+  margin-top: 24rpx;
+}
+
+.print-btn {
+  margin-top: 18rpx;
+}
+
+.cancel-btn {
+  margin-top: 18rpx;
+}
+
+.deposit-hint {
+  margin-top: 18rpx;
+  overflow: hidden;
+}
+
+.deposit-hint-title {
+  padding: 22rpx 28rpx 10rpx;
+  font-size: 23rpx;
+  color: #6e6e73;
+  font-weight: 800;
+}
+
+.deposit-hint-body {
+  padding: 0 28rpx 24rpx;
+  font-size: 28rpx;
+  color: #1d1d1f;
+}
+
+.hint-amt { font-weight: 700; }
+.hint-deduct { color: #FF3B30; font-weight: 700; }
+.hint-refund { color: #007AFF; font-weight: 700; }
+
+.secondary-btn {
+  min-height: 76rpx;
+  border-radius: 22rpx;
+  margin-top: 18rpx;
+  background: rgba(255, 255, 255, 0.92);
+  color: #007aff;
+  border: 1rpx solid rgba(0, 122, 255, 0.22);
+  box-shadow: 0 12rpx 34rpx rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 800;
+}
+.checkbox-line {
+  margin-top: 12rpx;
+  display: flex;
+  align-items: center;
+  color: #1d1d1f;
+  font-size: 27rpx;
+  font-weight: 700;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scan-entry {
+  font-size: 26rpx;
+  color: #6e6e73;
+  padding: 6rpx 18rpx;
+  border-radius: 999rpx;
+  background: #fff;
+  font-weight: 700;
+}
