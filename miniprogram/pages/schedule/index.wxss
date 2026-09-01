@@ -1,0 +1,247 @@
+.range {
+  padding: 8rpx;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8rpx;
+}
+
+.warehouse-hint,
+.date-card {
+  padding: 20rpx 24rpx;
+  margin-bottom: 18rpx;
+}
+
+.warehouse-hint {
+  color: #007aff;
+  font-size: 27rpx;
+  font-weight: 800;
+}
+
+.date-label {
+  color: #86868b;
+  font-size: 23rpx;
+  font-weight: 800;
+}
+
+.date-value {
+  margin-top: 8rpx;
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.range-item {
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16rpx;
+  color: #6e6e73;
+  font-size: 27rpx;
+  font-weight: 800;
+}
+
+.range-item.active {
+  background: #1d1d1f;
+  color: #fff;
+}
+
+.search {
+  height: 88rpx;
+  padding: 0 24rpx;
+  margin-top: 18rpx;
+  display: flex;
+  align-items: center;
+}
+
+.search input {
+  width: 100%;
+  font-size: 29rpx;
+}
+
+.filters {
+  white-space: nowrap;
+  margin-top: 18rpx;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 62rpx;
+  padding: 0 24rpx;
+  margin-right: 12rpx;
+  border-radius: 999rpx;
+  color: #6e6e73;
+  background: #fff;
+  font-size: 25rpx;
+  font-weight: 700;
+}
+
+.filter.active {
+  color: #fff;
+  background: #007aff;
+}
+
+.legend {
+  padding: 18rpx 22rpx;
+  margin-top: 18rpx;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8rpx;
+  color: #6e6e73;
+  font-size: 23rpx;
+}
+
+.dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 8rpx;
+  display: inline-block;
+  margin-right: 8rpx;
+}
+
+.dot.reserved { background: #ffcc00; }
+.dot.rented { background: #007aff; }
+.dot.overdue { background: #ff3b30; }
+.dot.repairing { background: #af52de; }
+
+.timeline-scroll {
+  margin-top: 22rpx;
+}
+
+.timeline {
+  min-width: 100%;
+}
+
+.header-row,
+.schedule-row {
+  display: flex;
+}
+
+.device-head,
+.device-col {
+  width: 220rpx;
+  flex-shrink: 0;
+}
+
+.device-head {
+  height: 84rpx;
+  padding: 18rpx;
+  color: #86868b;
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.day-head {
+  width: 112rpx;
+  height: 84rpx;
+  flex-shrink: 0;
+  padding-top: 14rpx;
+  text-align: center;
+  color: #6e6e73;
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.day-head.today {
+  color: #007aff;
+}
+
+.week {
+  margin-top: 4rpx;
+  color: #a1a1a6;
+  font-size: 20rpx;
+}
+
+.schedule-row {
+  margin-bottom: 12rpx;
+}
+
+.device-col {
+  min-height: 104rpx;
+  padding: 16rpx;
+  border-radius: 18rpx 0 0 18rpx;
+  background: #fff;
+  border: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.device-name {
+  font-size: 25rpx;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.device-no,
+.busy {
+  margin-top: 5rpx;
+  color: #86868b;
+  font-size: 21rpx;
+}
+
+.day-cell {
+  width: 112rpx;
+  min-height: 104rpx;
+  margin-left: 2rpx;
+  flex-shrink: 0;
+  padding: 12rpx 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 12rpx;
+  font-size: 21rpx;
+  font-weight: 800;
+  color: #6e6e73;
+  background: #ffffff;
+  border: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.cell-free {
+  background: #fff;
+  color: #c7c7cc;
+}
+
+.cell-reserved {
+  background: #fff4ce;
+  color: #9a6700;
+}
+
+.cell-rented {
+  background: #e8f2ff;
+  color: #0066d6;
+}
+
+.cell-overdue {
+  background: #ffe8e6;
+  color: #c9342b;
+}
+
+.cell-partReturned {
+  background: #fff0df;
+  color: #b85d00;
+}
+
+.cell-repairing {
+  background: #eeeeff;
+  color: #5e5ce6;
+}
+
+.dimmed {
+  opacity: 0.22;
+}
+
+.cell-label {
+  max-width: 96rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.empty {
+  padding: 36rpx;
+  margin-top: 22rpx;
+  text-align: center;
+  color: #86868b;
+}

@@ -1,0 +1,69 @@
+<view class="page">
+  <view class="nav-title">租借时间总览</view>
+  <view class="warehouse-hint card">当前仓库：{{currentWarehouse.name}}</view>
+
+  <view class="range card">
+    <view class="range-item {{item.active}}" wx:for="{{ranges}}" wx:key="value" data-value="{{item.value}}" bindtap="setRange">{{item.text}}</view>
+  </view>
+
+  <view class="date-card card">
+    <view class="date-label">起始日期</view>
+    <picker mode="date" value="{{startDate}}" bindchange="onStartDate">
+      <view class="date-value">{{startDate}}</view>
+    </picker>
+  </view>
+
+  <view class="search card" wx:if="{{showGlobalFilters}}">
+    <input placeholder="搜索设备编号、型号、名称" value="{{keyword}}" bindinput="onKeyword" />
+  </view>
+
+  <scroll-view class="filters" scroll-x wx:if="{{showGlobalFilters}}">
+    <view class="filter {{item.active}}" wx:for="{{categories}}" wx:key="key" data-category="{{item.key}}" bindtap="setCategory">{{item.text}}</view>
+  </scroll-view>
+
+  <scroll-view class="filters" scroll-x>
+    <view class="filter {{item.active}}" wx:for="{{statuses}}" wx:key="key" data-status="{{item.key}}" bindtap="setStatus">{{item.text}}</view>
+  </scroll-view>
+
+  <view class="legend card">
+    <view><text class="dot reserved"></text>预约</view>
+    <view><text class="dot rented"></text>借出</view>
+    <view><text class="dot overdue"></text>逾期</view>
+    <view><text class="dot repairing"></text>维修</view>
+  </view>
+
+  <view class="empty card" wx:if="{{!rows.length}}">当前范围没有设备日程</view>
+
+  <scroll-view scroll-x class="timeline-scroll" wx:if="{{rows.length}}">
+    <view class="timeline" style="width: {{timelineWidth}}rpx;">
+      <view class="header-row">
+        <view class="device-head">设备</view>
+        <view class="day-head {{item.todayClass}}" wx:for="{{days}}" wx:key="key">
+          <view>{{item.day}}</view>
+          <view class="week">周{{item.week}}</view>
+        </view>
+      </view>
+
+      <view class="schedule-row" wx:for="{{rows}}" wx:key="deviceId">
+        <view class="device-col" data-id="{{item.deviceId}}" bindtap="openDevice">
+          <view class="device-name">{{item.name}}</view>
+          <view class="device-no">{{item.deviceNo}}</view>
+          <view class="busy">{{item.busyCount}} 天占用</view>
+        </view>
+        <view
+          class="day-cell {{cell.className}} {{cell.dimmedClass}}"
+          wx:for="{{item.cells}}"
+          wx:for-item="cell"
+          wx:key="key"
+          data-rental="{{cell.rentalId}}"
+          data-device="{{item.deviceId}}"
+          data-day="{{cell.key}}"
+          data-status="{{cell.status}}"
+          bindtap="openCell"
+        >
+          <view class="cell-label">{{cell.displayText}}</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
