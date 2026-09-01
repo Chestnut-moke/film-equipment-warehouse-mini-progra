@@ -1,0 +1,81 @@
+<wxs module="money" src="../../utils/money.wxs" />
+<view class="page">
+  <view class="nav-title">新建租赁</view>
+  <view class="warehouse-hint card">当前仓库：{{currentWarehouse.name}}</view>
+
+  <view class="segmented card">
+    <view class="seg {{rentedActive}}" data-status="rented" bindtap="onStatus">直接借出</view>
+    <view class="seg {{reservedActive}}" data-status="reserved" bindtap="onStatus">保存预约</view>
+  </view>
+
+  <view class="section-title">租赁人</view>
+  <view class="form card">
+    <view class="field"><view class="label">姓名</view><input value="{{customer.name}}" data-field="name" bindinput="onCustomerInput" placeholder="租赁人姓名" /></view>
+    <view class="field"><view class="label">电话</view><input value="{{customer.phone}}" data-field="phone" bindinput="onCustomerInput" placeholder="手机号" /></view>
+    <view class="field"><view class="label">公司 / 剧组</view><input value="{{customer.company}}" data-field="company" bindinput="onCustomerInput" placeholder="选填" /></view>
+    <view class="field"><view class="label">微信号</view><input value="{{customer.wechat}}" data-field="wechat" bindinput="onCustomerInput" placeholder="选填" /></view>
+    <view class="field"><view class="label">身份证</view><input value="{{customer.idCard}}" data-field="idCard" bindinput="onCustomerInput" placeholder="选填" /></view>
+    <view class="field"><view class="label">地址</view><input value="{{customer.address}}" data-field="address" bindinput="onCustomerInput" placeholder="选填" /></view>
+  </view>
+
+  <view class="section-title section-title-row">
+    <text>选择设备</text>
+    <view class="scan-entry" bindtap="scanDevice">扫码拣选</view>
+  </view>
+  <scroll-view class="filters" scroll-x wx:if="{{categories.length}}">
+    <view class="filter {{item.active}} {{item.empty ? 'filter-empty' : ''}}" wx:for="{{categories}}" wx:key="key" data-key="{{item.key}}" bindtap="onCategoryFilter">{{item.text}}</view>
+  </scroll-view>
+  <checkbox-group bindchange="onDevicesChange">
+    <view class="device card" wx:for="{{devices}}" wx:key="_id">
+      <label class="device-label">
+        <checkbox value="{{item._id}}" checked="{{item.checked}}" color="#007AFF" />
+        <view class="device-text">
+          <view class="device-name">{{item.name}}</view>
+          <view class="device-meta">{{item.deviceNo}} · {{money.yuan(item.dailyRent)}}/天 · 押金 {{money.yuan(item.depositAmount)}}</view>
+        </view>
+      </label>
+    </view>
+  </checkbox-group>
+  <view class="empty card" wx:if="{{!devices.length}}">当前仓库暂无可租设备</view>
+
+  <view class="section-title">租期与费用</view>
+  <view class="form card">
+    <view class="field">
+      <view class="label">开始日期</view>
+      <picker mode="date" value="{{startDate}}" bindchange="onStartDate"><view class="picker-value">{{startDate}}</view></picker>
+    </view>
+    <view class="field">
+      <view class="label">开始小时</view>
+      <picker range="{{hourOptions}}" value="{{startHourIndex}}" bindchange="onStartHour"><view class="picker-value">{{hourOptions[startHourIndex]}}</view></picker>
+    </view>
+    <view class="field">
+      <view class="label">预计归还日期</view>
+      <picker mode="date" value="{{returnDate}}" bindchange="onReturnDate"><view class="picker-value">{{returnDate}}</view></picker>
+    </view>
+    <view class="field">
+      <view class="label">预计归还小时</view>
+      <picker range="{{hourOptions}}" value="{{returnHourIndex}}" bindchange="onReturnHour"><view class="picker-value">{{hourOptions[returnHourIndex]}}</view></picker>
+    </view>
+    <view class="field readonly"><view class="label">租赁时长</view><view>{{form.durationHours}} 小时 / 按 {{form.rentalDays}} 天计费</view></view>
+    <view class="field readonly"><view class="label">租金合计</view><view>{{money.yuan(form.rentAmount)}}<text wx:if="{{form.rentAmount === 0}}" class="free-hint">（免费租赁）</text></view></view>
+    <view class="field readonly"><view class="label">押金合计</view><view>{{money.yuan(form.depositAmount)}}</view></view>
+    <view class="field">
+      <view class="label">押金状态</view>
+      <picker range="{{depositStatuses}}" range-key="text" value="{{depositStatusIndex}}" bindchange="onDepositStatus">
+        <view class="picker-value">{{depositStatuses[depositStatusIndex].text}}</view>
+      </picker>
+    </view>
+    <view class="field"><view class="label">减免金额</view><input type="digit" value="{{form.discountAmount}}" data-field="discountAmount" bindinput="onFormInput" placeholder="优惠减免" /></view>
+    <view class="field"><view class="label">已收租金</view><input type="digit" value="{{form.paidAmount}}" data-field="paidAmount" bindinput="onFormInput" /></view>
+    <view class="field textarea"><view class="label">备注</view><textarea value="{{form.remark}}" data-field="remark" bindinput="onFormInput" placeholder="合同、取件方式、特殊说明"></textarea></view>
+  </view>
+
+  <view class="summary card">
+    <view class="row"><text>已选设备</text><text>{{selectedIds.length}} 台</text></view>
+    <view class="row"><text>应收租金</text><text>{{money.yuan(form.totalAmount)}}</text></view>
+    <view class="row"><text>押金</text><text>{{money.yuan(form.depositAmount)}}</text></view>
+    <view class="row"><text>未收</text><text>{{money.yuan(form.unpaidAmount)}}</text></view>
+  </view>
+
+  <view class="primary-btn submit" bindtap="submit">{{submitText}}</view>
+</view>
