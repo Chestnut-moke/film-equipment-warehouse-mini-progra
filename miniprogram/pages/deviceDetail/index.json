@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "设备详情",
+  "usingComponents": {
+    "export-modal": "../../components/export-modal/index"
+  }
+}

@@ -1,0 +1,102 @@
+<wxs module="money" src="../../utils/money.wxs" />
+<view class="page" wx:if="{{_error && !device}}"><view class="state-error" bindtap="onRetry">加载失败，点击重试</view></view>
+<view class="state-hint card" wx:elif="{{!device}}">加载设备信息...</view>
+<view class="page" wx:elif="{{device}}">
+  <view class="detail-card card">
+    <view class="row">
+      <view class="device-no">{{device.deviceNo}}</view>
+      <view class="status-pill status-{{device.displayStatus}}">{{device.statusText}}</view>
+    </view>
+    <view class="device-name">{{device.name}}</view>
+    <view class="device-meta">{{device.brand}} {{device.model}} · {{device.category}}</view>
+    <view class="qr-box">
+      <canvas type="2d" id="barcodeCanvas" class="barcode-canvas" wx:if="{{device}}" />
+      <view class="qr-code">{{device.deviceNo}}</view>
+      <view class="qr-tip">扫描条形码或输入编号即可识别设备</view>
+    </view>
+  </view>
+
+  <view class="info-grid">
+    <view class="info card">
+      <view class="info-value">{{device.rentalCount}}</view>
+      <view class="info-label">租赁次数</view>
+    </view>
+    <view class="info card">
+      <view class="info-value">{{device.totalRentalDays}}</view>
+      <view class="info-label">累计天数</view>
+    </view>
+    <view class="info card">
+      <view class="info-value">{{money.yuan(device.totalIncome)}}</view>
+      <view class="info-label">累计收入</view>
+    </view>
+  </view>
+
+  <view class="section-title">设备信息</view>
+  <view class="card list">
+    <view class="line row"><text>存放位置</text><text>{{device.location || '-'}}</text></view>
+    <view class="line row"><text>序列号</text><text>{{device.serialNo || '-'}}</text></view>
+    <view class="line row"><text>日租金</text><text>{{money.yuan(device.dailyRent)}}</text></view>
+    <view class="line row"><text>押金</text><text>{{money.yuan(device.depositAmount)}}</text></view>
+    <view class="line"><view class="muted">配件</view><view class="long">{{device.accessoriesText || '-'}}</view></view>
+    <view class="line"><view class="muted">备注</view><view class="long">{{device.remark || '-'}}</view></view>
+  </view>
+
+  <view class="button-grid">
+    <view class="primary-btn" wx:if="{{device.displayStatus === 'available'}}" bindtap="rent">新建租赁</view>
+    <view class="secondary-btn" wx:if="{{device.currentRentalId}}" bindtap="openRental">查看租赁单</view>
+    <view class="danger-row">
+      <view class="secondary-btn" bindtap="edit">编辑设备</view>
+      <view class="secondary-btn" bindtap="showExport">导出该设备历史</view>
+    </view>
+    <view class="danger-row">
+      <view class="danger-btn" wx:if="{{device.displayStatus === 'available' || device.displayStatus === 'repairing'}}" bindtap="disableDevice">停用</view>
+      <view class="danger-btn" wx:if="{{device.displayStatus === 'available'}}" bindtap="repair">设为维修</view>
+    </view>
+    <view class="secondary-btn" wx:if="{{device.displayStatus === 'repairing' || device.displayStatus === 'disabled'}}" bindtap="available">恢复可租</view>
+  </view>
+
+  <view class="section-title">租期日程</view>
+  <view class="mini-schedule card">
+    <scroll-view scroll-x>
+      <view class="mini-row" style="width: 1344rpx;">
+        <view class="mini-day" wx:for="{{scheduleDays}}" wx:key="key">
+          <view class="mini-date">{{item.day}}</view>
+          <view class="mini-week">周{{item.week}}</view>
+        </view>
+      </view>
+      <view class="mini-row" style="width: 1344rpx;">
+        <view class="mini-cell {{item.className}}" wx:for="{{scheduleCells}}" wx:key="key" data-id="{{item.rentalId}}" bindtap="openScheduleRental">
+          <view>{{item.displayText}}</view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="schedule-more" bindtap="openSchedule">查看完整日程</view>
+  </view>
+
+  <view class="section-title" wx:if="{{scheduleItems.length}}">未来安排</view>
+  <view class="schedule-item card" wx:for="{{scheduleItems}}" wx:key="rentalId" data-id="{{item.rentalId}}" bindtap="openScheduleRental">
+    <view>
+      <view class="schedule-title">{{item.customerName}}</view>
+      <view class="schedule-sub">{{item.startDate}} 至 {{item.endDate}} · {{item.statusText}}</view>
+    </view>
+    <view class="status-pill status-{{item.status}}">{{item.statusText}}</view>
+  </view>
+
+  <view class="section-title">历史记录</view>
+  <view class="empty card" wx:if="{{!logs.length}}">暂无历史</view>
+  <view class="log card" wx:for="{{logs}}" wx:key="_id">
+    <view class="log-title">{{item.title}}</view>
+    <view class="log-sub">{{item.content}}</view>
+    <view class="log-time">{{item.occurredAt}}</view>
+  </view>
+
+  <export-modal
+    visible="{{exportVisible}}"
+    title="导出设备历史"
+    showFormat
+    showDateRange
+    showHeader
+    bind:close="hideExport"
+    bind:submit="submitExport"
+  />
+</view>
