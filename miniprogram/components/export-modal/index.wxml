@@ -1,0 +1,104 @@
+<view class="modal-mask" wx:if="{{visible}}" bindtap="onMask">
+  <view class="modal card" catchtap="noop">
+    <view class="modal-title">{{title}}</view>
+
+    <!-- 范围（仅 history） -->
+    <view class="field" wx:if="{{showScope}}">
+      <view class="label">范围</view>
+      <picker range="{{scopeOptions}}" value="{{scopeIndex}}" bindchange="onScopeChange">
+        <view class="picker-value">{{scopeOptions[scopeIndex]}}</view>
+      </picker>
+    </view>
+
+    <!-- 格式（history / deviceDetail） -->
+    <view class="field" wx:if="{{showFormat}}">
+      <view class="label">格式</view>
+      <picker range="{{formatOptions}}" value="{{formatIndex}}" bindchange="onFormatChange">
+        <view class="picker-value">{{formatOptions[formatIndex]}}</view>
+      </picker>
+    </view>
+
+    <!-- 日期范围（history / deviceDetail） -->
+    <block wx:if="{{showDateRange}}">
+      <view class="field">
+        <view class="label">开始日期</view>
+        <picker mode="date" value="{{startDate}}" bindchange="onStartDate">
+          <view class="picker-value">{{startDate}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <view class="label">结束日期</view>
+        <picker mode="date" value="{{endDate}}" bindchange="onEndDate">
+          <view class="picker-value">{{endDate}}</view>
+        </picker>
+      </view>
+    </block>
+
+    <!-- 多条件筛选（仅 history） -->
+    <block wx:if="{{showFilters}}">
+      <view class="field">
+        <view class="label">租赁状态</view>
+        <picker range="{{statusOptions}}" value="{{filterStatusIndex}}" bindchange="onStatusFilter">
+          <view class="picker-value">{{statusOptions[filterStatusIndex]}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <view class="label">设备类别</view>
+        <picker range="{{categoryOptions}}" value="{{filterCategoryIndex}}" bindchange="onCategoryFilter">
+          <view class="picker-value">{{categoryOptions[filterCategoryIndex]}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <view class="label">租赁人</view>
+        <input value="{{customerKeyword}}" data-field="customerKeyword" bindinput="onCustomerKeyword" placeholder="姓名 / 电话" />
+      </view>
+    </block>
+
+    <!-- 抬头 / Logo（三者共用） -->
+    <checkbox-group wx:if="{{showHeader}}" bindchange="onHeaderToggle">
+      <label class="checkbox-line"><checkbox value="header" checked="{{includeHeader}}" color="#007AFF" />添加抬头 / Logo</label>
+    </checkbox-group>
+    <block wx:if="{{showHeader && includeHeader}}">
+      <view class="field"><view class="label">抬头名称</view><input value="{{companyName}}" data-field="companyName" bindinput="onInput" placeholder="公司或门店名称" /></view>
+      <view class="field"><view class="label">联系电话</view><input value="{{contactPhone}}" data-field="contactPhone" bindinput="onInput" placeholder="联系电话" /></view>
+      <view class="secondary-btn" bindtap="chooseLogo">{{logoName || '选择 Logo'}}</view>
+    </block>
+
+    <!-- 经办人（仅 rentalDetail） -->
+    <view class="field" wx:if="{{showOperator}}">
+      <view class="label">经办人</view>
+      <input type="nickname" value="{{operatorName}}" data-field="operatorName" bindinput="onInput" placeholder="点击自动填入微信昵称" />
+    </view>
+    <view class="field field-textarea" wx:if="{{showOperator}}">
+      <view class="label">
+        <text>合同条款</text>
+        <view class="terms-actions">
+          <text class="terms-link" bindtap="useDefaultTerms">默认条款</text>
+          <text class="terms-link" bindtap="clearTerms">清空</text>
+          <text class="terms-link" bindtap="editDefaultTerms">编辑默认</text>
+        </view>
+      </view>
+      <textarea value="{{contractTerms}}" data-field="contractTerms" bindinput="onInput" placeholder="选填，如损坏赔偿、逾期费用等" maxlength="2000" />
+    </view>
+
+    <view class="modal-actions">
+      <view class="secondary-btn" bindtap="onCancel">取消</view>
+      <view class="primary-btn" bindtap="onSubmit">{{submitting ? '生成中' : submitLabel}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- 编辑默认合同条款弹窗 -->
+<view class="modal-mask" wx:if="{{termsEditVisible}}" bindtap="hideTermsEdit">
+  <view class="modal card terms-edit-modal" catchtap="noop">
+    <view class="modal-title">编辑默认合同条款</view>
+    <view class="field field-textarea">
+      <textarea value="{{termsEditText}}" bindinput="onTermsEditInput" placeholder="设置默认条款，如&#10;1. 损坏赔偿按设备原价&#10;2. 逾期每天加收 50% 日租" maxlength="1000" />
+    </view>
+    <text class="terms-count">{{termsEditText.length}}/1000</text>
+    <view class="modal-actions">
+      <view class="secondary-btn" bindtap="hideTermsEdit">取消</view>
+      <view class="primary-btn" bindtap="saveTermsEdit">保存</view>
+    </view>
+  </view>
+</view>
