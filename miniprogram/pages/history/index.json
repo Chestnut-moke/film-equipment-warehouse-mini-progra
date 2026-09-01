@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "统计",
+  "usingComponents": {
+    "export-modal": "../../components/export-modal/index"
+  }
+}

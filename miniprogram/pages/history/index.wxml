@@ -1,0 +1,65 @@
+<wxs module="money" src="../../utils/money.wxs" />
+<view class="page">
+  <view class="state-error" wx:if="{{_error && !stats.totalIncome}}" bindtap="onRetry">加载失败，点击重试</view>
+  <view class="loading-bar" wx:elif="{{_loading}}">刷新中...</view>
+  <block>
+  <view class="nav-title">统计</view>
+
+  <view class="total card">
+    <view class="total-label">累计收款</view>
+    <view class="total-value">{{money.yuan(stats.totalIncome)}}</view>
+    <view class="total-sub">本月 {{money.yuan(stats.monthIncome)}} · 本月 {{stats.monthRentalCount}} 单</view>
+  </view>
+
+  <view class="metric-grid">
+    <view class="metric card"><view class="metric-value">{{stats.deviceCount}}</view><view class="metric-label">设备</view></view>
+    <view class="metric card"><view class="metric-value">{{stats.customerCount}}</view><view class="metric-label">租赁人</view></view>
+    <view class="metric card"><view class="metric-value">{{stats.availableCount}}</view><view class="metric-label">可租</view></view>
+    <view class="metric card"><view class="metric-value">{{stats.overdueCount}}</view><view class="metric-label">逾期</view></view>
+  </view>
+
+  <view class="section-title">热门设备</view>
+  <view class="rank card" wx:for="{{stats.hotDevices}}" wx:key="_id">
+    <view>
+      <view class="rank-title">{{item.name}}</view>
+      <view class="rank-sub">{{item.deviceNo}} · {{item.brand}} {{item.model}}</view>
+    </view>
+    <view class="rank-count">{{item.rentalCount}} 次</view>
+  </view>
+
+  <view class="section-title">租赁人排行</view>
+  <view class="rank card" wx:for="{{stats.hotCustomers}}" wx:key="_id">
+    <view>
+      <view class="rank-title">{{item.name}}</view>
+      <view class="rank-sub">{{item.phone}} · {{item.company || '-'}}</view>
+    </view>
+    <view class="rank-count">{{item.rentalCount}} 次</view>
+  </view>
+
+  <view class="section-title section-title-row">
+    <text>历史记录</text>
+    <view class="primary-btn export-entry" bindtap="showExport">导出</view>
+  </view>
+  <scroll-view class="filters" scroll-x>
+    <view class="filter {{item.active}}" wx:for="{{logFilters}}" wx:key="key" data-key="{{item.key}}" bindtap="onLogFilter">{{item.text}}</view>
+  </scroll-view>
+  <view class="empty card" wx:if="{{!logs.length}}">暂无历史记录</view>
+  <view class="log card" wx:for="{{logs}}" wx:key="_id">
+    <view class="log-title">{{item.title}}</view>
+    <view class="log-sub">{{item.content}}</view>
+    <view class="log-time">{{item.occurredAt}}</view>
+  </view>
+  </block>
+
+  <export-modal
+    visible="{{exportVisible}}"
+    title="导出历史记录"
+    showScope
+    showFormat
+    showDateRange
+    showFilters
+    showHeader
+    bind:close="hideExport"
+    bind:submit="submitExport"
+  />
+</view>
