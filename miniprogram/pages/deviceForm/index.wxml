@@ -1,0 +1,79 @@
+<view class="page">
+  <view class="nav-title">{{pageTitle}}</view>
+
+  <view class="form card">
+    <view class="field">
+      <view class="label">所属仓库</view>
+      <picker wx:if="{{canChangeWarehouse}}" range="{{warehouseNames}}" value="{{warehouseIndex}}" bindchange="onWarehouse">
+        <view class="picker-value">{{warehouseNames[warehouseIndex]}}</view>
+      </picker>
+      <view wx:else class="picker-value muted">{{warehouseNames[warehouseIndex]}}（已预约或借出时不可修改）</view>
+    </view>
+    <view class="field">
+      <view class="label">设备编号</view>
+      <input value="{{form.deviceNo}}" placeholder="如 CAM-A7S3-001" data-field="deviceNo" bindinput="onInput" />
+    </view>
+    <view class="field">
+      <view class="label">设备名称</view>
+      <input value="{{form.name}}" placeholder="如 Sony A7S III" data-field="name" bindinput="onInput" />
+    </view>
+    <view class="field">
+      <view class="label">分类</view>
+      <picker range="{{categories}}" bindchange="onCategory">
+        <view class="picker-value">{{form.category}}</view>
+      </picker>
+    </view>
+    <view class="field">
+      <view class="label">品牌</view>
+      <input value="{{form.brand}}" placeholder="Sony / Aputure" data-field="brand" bindinput="onInput" />
+    </view>
+    <view class="field">
+      <view class="label">型号</view>
+      <input value="{{form.model}}" placeholder="型号" data-field="model" bindinput="onInput" />
+    </view>
+    <view class="field">
+      <view class="label">序列号</view>
+      <input value="{{form.serialNo}}" placeholder="选填" data-field="serialNo" bindinput="onInput" />
+    </view>
+    <view class="field">
+      <view class="label">存放位置</view>
+      <input value="{{form.location}}" placeholder="A区-摄影机柜" data-field="location" bindinput="onInput" />
+    </view>
+    <view class="field">
+      <view class="label">购买日期</view>
+      <picker mode="date" value="{{form.purchaseDate}}" bindchange="onPurchaseDate">
+        <view class="picker-value">{{purchaseDateText}}</view>
+      </picker>
+    </view>
+    <view class="field">
+      <view class="label">购买价格</view>
+      <input type="digit" value="{{form.purchasePrice}}" placeholder="0" data-field="purchasePrice" bindinput="onInput" />
+    </view>
+    <view class="field">
+      <view class="label">日租金</view>
+      <input type="digit" value="{{form.dailyRent}}" placeholder="0" data-field="dailyRent" bindinput="onInput" />
+    </view>
+    <view class="field">
+      <view class="label">周租金</view>
+      <input type="digit" value="{{form.weeklyRent}}" placeholder="0" data-field="weeklyRent" bindinput="onInput" />
+    </view>
+    <view class="field">
+      <view class="label">月租金</view>
+      <input type="digit" value="{{form.monthlyRent}}" placeholder="0" data-field="monthlyRent" bindinput="onInput" />
+    </view>
+    <view class="field">
+      <view class="label">押金</view>
+      <input type="digit" value="{{form.depositAmount}}" placeholder="0" data-field="depositAmount" bindinput="onInput" />
+    </view>
+    <view class="field textarea">
+      <view class="label">配件清单</view>
+      <textarea value="{{form.accessoriesText}}" placeholder="电池 x2，充电器 x1" data-field="accessoriesText" bindinput="onInput"></textarea>
+    </view>
+    <view class="field textarea">
+      <view class="label">备注</view>
+      <textarea value="{{form.remark}}" placeholder="设备状况、注意事项" data-field="remark" bindinput="onInput"></textarea>
+    </view>
+  </view>
+
+  <view class="primary-btn save" bindtap="save">保存设备</view>
+</view>
