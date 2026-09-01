@@ -1,0 +1,32 @@
+<view class="page">
+  <view class="state-error" wx:if="{{_error && !devices.length}}" bindtap="onRetry">加载失败，点击重试</view>
+  <view class="loading-bar" wx:elif="{{_loading}}">刷新中...</view>
+  <block>
+  <view class="top row">
+    <view class="nav-title">设备库</view>
+    <view class="add" bindtap="addDevice">＋</view>
+  </view>
+
+  <view class="search card">
+    <input placeholder="搜索编号、型号、品牌" value="{{keyword}}" bindinput="onKeyword" />
+  </view>
+
+  <scroll-view class="filters" scroll-x>
+    <view class="filter {{item.active}}" wx:for="{{statuses}}" wx:key="key" data-status="{{item.key}}" bindtap="setStatus">{{item.text}}</view>
+  </scroll-view>
+  <scroll-view class="filters" scroll-x wx:if="{{categories.length}}">
+    <view class="filter {{item.active}} {{item.empty ? 'filter-empty' : ''}}" wx:for="{{categories}}" wx:key="key" data-key="{{item.key}}" bindtap="onCategoryFilter">{{item.text}}</view>
+  </scroll-view>
+
+  <view class="empty card" wx:if="{{!devices.length}}">没有符合条件的设备</view>
+
+  <view class="device card" wx:for="{{devices}}" wx:key="_id" data-id="{{item._id}}" bindtap="openDevice">
+    <view class="device-main">
+      <view class="device-name">{{item.name}}</view>
+      <view class="device-meta">{{item.deviceNo}} · {{item.brand}} {{item.model}}</view>
+      <view class="device-meta">{{item.location}} · 租赁 {{item.rentalCount}} 次</view>
+    </view>
+    <view class="status-pill status-{{item.displayStatus}}">{{item.statusText}}</view>
+  </view>
+  </block>
+</view>

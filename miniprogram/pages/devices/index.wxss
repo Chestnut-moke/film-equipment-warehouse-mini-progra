@@ -1,0 +1,87 @@
+.top {
+  align-items: center;
+}
+
+.add {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 36rpx;
+  background: #007aff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  font-weight: 500;
+}
+
+.search {
+  padding: 0 24rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+}
+
+.search input {
+  width: 100%;
+  font-size: 29rpx;
+}
+
+.filters {
+  white-space: nowrap;
+  margin: 22rpx 0;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 66rpx;
+  padding: 0 28rpx;
+  margin-right: 14rpx;
+  border-radius: 999rpx;
+  color: #6e6e73;
+  background: #fff;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.filter.active {
+  color: #fff;
+  background: #1d1d1f;
+}
+
+.filter-empty {
+  color: #c7c7cc;
+}
+
+.device {
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.device-main {
+  flex: 1;
+  min-width: 0;
+  padding-right: 18rpx;
+}
+
+.device-name {
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.device-meta {
+  margin-top: 8rpx;
+  color: #86868b;
+  font-size: 24rpx;
+}
+
+.empty {
+  padding: 38rpx;
+  color: #86868b;
+  text-align: center;
+}
