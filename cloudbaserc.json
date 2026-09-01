@@ -1,0 +1,12 @@
+{
+  "envId": "YOUR_CLOUD_ENV_ID",
+  "functionRoot": "./cloudfunctions",
+  "functions": [
+    {
+      "name": "warehouse",
+      "timeout": 30,
+      "runtime": "Nodejs16.13",
+      "installDependency": true
+    }
+  ]
+}

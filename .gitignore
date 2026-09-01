@@ -1,0 +1,39 @@
+# Windows
+[Dd]esktop.ini
+Thumbs.db
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+
+# Node.js
+node_modules/
+
+# WeChat DevTools local settings
+project.private.config.json
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example
+
+# Build and package output
+dist/
+miniprogram_npm/
+cloudfunctions/**/node_modules/
+
+# User data and generated exports
+exports/
+backups/
+*.pdf
+*.csv
+backup-*.json
+
+# Local IDE and logs
+.vscode/
+.idea/
+*.log
